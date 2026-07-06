@@ -10,7 +10,7 @@
     "@capacitor/core": "^5.7.0",
     "@capacitor/app": "^5.0.6",
     "@capacitor/local-notifications": "^5.0.6",
-    "@capawesome-team/capacitor-foreground-service": "^1.2.1"
+    "@capawesome-team/capacitor-android-foreground-service": "^1.2.1"
   },
   "devDependencies": {
     "@capacitor/cli": "^5.7.0"
