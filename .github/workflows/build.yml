@@ -41,9 +41,8 @@ jobs:
           cp node_modules/@capacitor/local-notifications/dist/plugin.js www/js/local-notifications-plugin.js
           cp node_modules/@capawesome-team/capacitor-foreground-service/dist/plugin.js www/js/foreground-service-plugin.js
 
-      - name: ⚙️ تهيئة Capacitor ومشروع أندرويد
+      - name: ⚙️ إضافة مشروع أندرويد
         run: |
-          npx cap init "تطبيق الفصالة" "com.diaa.fessala" --web-dir=www
           npx cap add android
 
       - name: 🔒 إضافة صلاحيات Android (Foreground Service, Notifications)
@@ -66,5 +65,5 @@ jobs:
       - name: 📤 رفع الـ APK كـ Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: fessala-app-debug
+          name: fessala-app-debug 
           path: android/app/build/outputs/apk/debug/app-debug.apk
