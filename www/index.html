@@ -1,1 +1,1416 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <title>تطبيق الفصالة - لخياطة العصرية</title>
+    <!-- ====================== CSS الأصلي كاملاً ====================== -->
+    <style>
+        :root {
+            --bg: #FFF8F3;
+            --cream: #FFF5EC;
+            --beige: #F5E6D3;
+            --card: #FFFFFF;
+            --terracotta: #C67B5C;
+            --terracotta-dark: #A85D40;
+            --terracotta-light: #F0D5C8;
+            --terracotta-lighter: #F9EBE4;
+            --gold: #C9A96E;
+            --gold-light: #F5EDDC;
+            --text: #4A2C1E;
+            --text-light: #6B4D3C;
+            --text-muted: #8B6F5E;
+            --border: #E8D5C4;
+            --border-light: #F0E0D4;
+            --red: #D44C3D;
+            --red-bg: #FDE8E5;
+            --red-light: #FEF2F0;
+            --orange: #E8913A;
+            --orange-bg: #FFF3E6;
+            --orange-light: #FFF8F2;
+            --green: #5B8C5A;
+            --green-bg: #EAF5E9;
+            --green-light: #F2FAF1;
+            --shadow: 0 2px 12px rgba(74, 44, 30, 0.07);
+            --shadow-lg: 0 6px 24px rgba(74, 44, 30, 0.10);
+            --shadow-sm: 0 1px 4px rgba(74, 44, 30, 0.05);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --radius-xs: 8px;
+            --radius-pill: 50px;
+            --font-sm: clamp(13px, 1.9vw, 14px);
+            --font-md: clamp(15px, 2.2vw, 17px);
+            --font-lg: clamp(17px, 2.6vw, 19px);
+            --font-xl: clamp(20px, 3.2vw, 24px);
+            --font-2xl: clamp(24px, 3.8vw, 28px);
+            --font-3xl: clamp(28px, 4.5vw, 34px);
+            --transition: 0.22s ease;
+            --touch-min: 48px;
+        }
 
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Arabic', 'Droid Arabic Naskh', Tahoma, 'Traditional Arabic', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .app-container {
+            max-width: 560px;
+            width: 100%;
+            margin: 0 auto;
+            padding: clamp(8px, 2vw, 14px) clamp(10px, 2.5vw, 18px) 24px;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(12px, 2vw, 18px);
+            overflow-x: hidden;
+        }
+
+        .app-header {
+            text-align: center;
+            padding: clamp(14px, 3vw, 20px) 8px 6px;
+            position: relative;
+            width: 100%;
+        }
+        .app-header .logo-icon {
+            font-size: clamp(38px, 8vw, 52px);
+            display: block;
+            margin-bottom: 2px;
+            animation: gentleBounce 3s ease-in-out infinite;
+        }
+        @keyframes gentleBounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+        .app-header h1 {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--terracotta);
+            letter-spacing: -0.3px;
+            margin: 0;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .app-header .subtitle {
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            margin-top: 3px;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 5px;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 4px 5px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 8px;
+            z-index: 100;
+            border: 1.5px solid var(--border);
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: clamp(10px, 1.8vw, 13px) clamp(4px, 1vw, 10px);
+            border: none;
+            background: transparent;
+            border-radius: calc(var(--radius) - 5px);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all var(--transition);
+            font-family: inherit;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-height: var(--touch-min);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .tab-btn:hover {
+            background: var(--terracotta-light);
+            color: var(--terracotta-dark);
+        }
+        .tab-btn:active {
+            transform: scale(0.96);
+            transition: transform 0.1s ease;
+        }
+        .tab-btn.active {
+            background: var(--terracotta);
+            color: #FFF;
+            box-shadow: 0 3px 12px rgba(198, 123, 92, 0.35);
+            font-weight: 700;
+        }
+        .tab-btn .tab-emoji {
+            font-size: clamp(16px, 2.5vw, 20px);
+            flex-shrink: 0;
+        }
+        @media (max-width: 360px) {
+            .tab-btn {
+                font-size: 11px;
+                gap: 2px;
+                padding: 10px 2px;
+            }
+            .tab-btn .tab-emoji {
+                font-size: 14px;
+            }
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: clamp(12px, 2vw, 18px);
+            animation: fadeSlideIn 0.35s ease;
+            width: 100%;
+        }
+        .tab-content.active {
+            display: flex;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: clamp(14px, 3vw, 20px) clamp(12px, 2.5vw, 18px);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            width: 100%;
+            overflow: hidden;
+        }
+        .card.accent-top {
+            border-top: 4px solid var(--terracotta);
+        }
+        .card.gold-top {
+            border-top: 4px solid var(--gold);
+        }
+        .card-header {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: var(--terracotta-dark);
+            margin-bottom: clamp(10px, 2vw, 15px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .card-header .icon {
+            font-size: clamp(20px, 3.5vw, 26px);
+            flex-shrink: 0;
+        }
+
+        .form-group {
+            margin-bottom: clamp(10px, 1.8vw, 14px);
+            width: 100%;
+        }
+        .form-group label {
+            display: block;
+            font-size: var(--font-md);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .form-group label .unit {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: var(--font-sm);
+        }
+        input[type="number"],
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: clamp(12px, 2vw, 15px) clamp(12px, 2vw, 16px);
+            font-size: var(--font-md);
+            font-family: inherit;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--cream);
+            color: var(--text);
+            transition: all var(--transition);
+            -webkit-appearance: none;
+            appearance: none;
+            min-height: var(--touch-min);
+            touch-action: manipulation;
+            max-width: 100%;
+        }
+        input[type="number"] {
+            dir: ltr;
+            text-align: left;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.5px;
+        }
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--terracotta);
+            box-shadow: 0 0 0 4px rgba(198, 123, 92, 0.10);
+            background: #FFF;
+        }
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A2C1E' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 14px center;
+            padding-left: 40px;
+        }
+        .custom-ease-input {
+            display: none;
+            animation: fadeSlideIn 0.3s ease;
+        }
+        .custom-ease-input.visible {
+            display: block;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: clamp(13px, 2vw, 16px) clamp(18px, 3vw, 26px);
+            font-size: var(--font-md);
+            font-weight: 700;
+            font-family: inherit;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+            min-height: var(--touch-min);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        .btn:active {
+            transform: scale(0.96);
+            transition: transform 0.08s ease;
+        }
+        .btn-primary {
+            background: var(--terracotta);
+            color: #FFF;
+            box-shadow: 0 4px 14px rgba(198, 123, 92, 0.28);
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: var(--terracotta-dark);
+            box-shadow: 0 6px 20px rgba(168, 93, 64, 0.38);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(168, 93, 64, 0.28);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--terracotta);
+            color: var(--terracotta);
+        }
+        .btn-outline:hover {
+            background: var(--terracotta-light);
+        }
+        .btn-danger {
+            background: var(--red);
+            color: #FFF;
+            font-weight: 700;
+        }
+        .btn-danger:hover {
+            background: #b83a2e;
+        }
+        .btn-success {
+            background: var(--green);
+            color: #FFF;
+            font-weight: 700;
+        }
+        .btn-success:hover {
+            background: #4a7a49;
+        }
+        .btn-sm {
+            padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
+            font-size: var(--font-sm);
+            min-height: 40px;
+            border-radius: var(--radius-xs);
+        }
+        .btn-pill {
+            border-radius: var(--radius-pill);
+            padding: clamp(10px, 1.8vw, 13px) clamp(14px, 2.5vw, 20px);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            min-height: 42px;
+            border: 2px solid var(--border);
+            background: var(--card);
+            color: var(--text-light);
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all var(--transition);
+        }
+        .btn-pill.active-filter {
+            background: var(--terracotta);
+            color: #FFF;
+            border-color: var(--terracotta);
+            box-shadow: 0 3px 10px rgba(198, 123, 92, 0.30);
+            font-weight: 700;
+        }
+        .btn-pill:hover {
+            border-color: var(--terracotta);
+            background: var(--terracotta-lighter);
+        }
+        .btn-pill.active-filter:hover {
+            background: var(--terracotta-dark);
+            border-color: var(--terracotta-dark);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: clamp(8px, 1.5vw, 12px);
+            margin-top: 8px;
+        }
+        .result-item {
+            background: var(--gold-light);
+            border-radius: var(--radius-sm);
+            padding: clamp(10px, 2vw, 14px) clamp(8px, 1.5vw, 12px);
+            text-align: center;
+            border: 1.5px solid #e8d9b8;
+        }
+        .result-label {
+            font-size: var(--font-sm);
+            color: var(--text-light);
+        }
+        .result-value {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--terracotta-dark);
+            direction: ltr;
+        }
+        .search-bar {
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .search-bar input {
+            padding-right: 44px;
+        }
+        .search-bar .search-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+        .client-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: clamp(12px, 2.5vw, 16px) clamp(10px, 2vw, 14px);
+            box-shadow: var(--shadow-sm);
+            border-right: 6px solid var(--border);
+            transition: all var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .client-card.urgency-red {
+            border-right-color: var(--red);
+            background: var(--red-light);
+        }
+        .client-card.urgency-orange {
+            border-right-color: var(--orange);
+            background: var(--orange-light);
+        }
+        .client-card.urgency-green {
+            border-right-color: var(--green);
+            background: var(--green-light);
+        }
+        .client-card .client-name {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .client-card .urgency-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-red {
+            background: var(--red);
+            color: #FFF;
+        }
+        .badge-orange {
+            background: var(--orange);
+            color: #FFF;
+        }
+        .badge-green {
+            background: var(--green);
+            color: #FFF;
+        }
+        .client-card .client-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 8px;
+            font-size: var(--font-sm);
+            color: var(--text-light);
+        }
+        .client-image {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            margin: 6px 0;
+            cursor: pointer;
+        }
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .more-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px;
+            margin-right: auto;
+            align-self: center;
+        }
+        .context-menu {
+            position: absolute;
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            z-index: 500;
+            padding: 8px 0;
+            min-width: 160px;
+            display: none;
+        }
+        .context-menu.active {
+            display: block;
+        }
+        .context-menu button {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: var(--font-sm);
+            cursor: pointer;
+            text-align: right;
+        }
+        .context-menu button:hover {
+            background: var(--terracotta-light);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .modal-small {
+            max-width: 300px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #3D2117;
+            color: #FFF;
+            padding: 14px 24px;
+            border-radius: 30px;
+            font-size: var(--font-md);
+            font-weight: 600;
+            z-index: 9999;
+            animation: toastIn 0.4s ease, toastOut 0.4s ease 2.2s forwards;
+            max-width: 92vw;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+        .hidden-file-input {
+            display: none;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: var(--radius-xs);
+            display: none;
+        }
+        .image-preview.visible {
+            display: block;
+        }
+        .divider {
+            border-top: 1px solid var(--border-light);
+            margin: 8px 0;
+        }
+
+        /* Collapsible styles */
+        .collapsible-toggle {
+            background: none;
+            border: none;
+            font-size: var(--font-lg);
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--terracotta-dark);
+            padding: 8px 0;
+            width: 100%;
+            text-align: right;
+        }
+        .collapsible-content {
+            display: none;
+            margin-top: 10px;
+        }
+        .collapsible-content.open {
+            display: block;
+        }
+        .collapsible-toggle.open::after {
+            content: " ▲";
+        }
+        .collapsible-toggle::after {
+            content: " ▼";
+        }
+    </style>
+
+    <!-- ====================== تحميل إضافات Capacitor ====================== -->
+    <script src="js/capacitor.js"></script>
+    <script src="js/app-plugin.js"></script>
+    <script src="js/local-notifications-plugin.js"></script>
+    <script src="js/foreground-service-plugin.js"></script>
+</head>
+<body>
+    <!-- ====================== هيكل HTML الأصلي كاملاً ====================== -->
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <span class="logo-icon">🧵</span>
+            <h1>تطبيق الفصالة</h1>
+            <p class="subtitle">الحلّ الكامل ديال الخياطة العصرية ✂️📏</p>
+        </header>
+
+        <!-- TABS -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="clients"><span class="tab-emoji">📒</span> كناش الكليانات</button>
+            <button class="tab-btn" data-tab="calculator"><span class="tab-emoji">🧮</span> حاسبة الفصالة</button>
+            <button class="tab-btn" data-tab="agenda"><span class="tab-emoji">📋</span> الأجندة</button>
+        </nav>
+
+        <!-- TAB 1: CLIENTS (DEFAULT) -->
+        <section class="tab-content active" id="tab-clients">
+            <div class="card accent-top">
+                <div class="card-header"><span class="icon">👤</span> ضيفي كليانة جديدة</div>
+                <form id="client-form" autocomplete="off">
+                    <div class="form-group"><label>إسم الكليانة *</label><input type="text" id="client-name" required></div>
+                    <div class="form-group"><label>العنوان</label><input type="text" id="client-location"></div>
+                    <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="client-phone"></div>
+                    <div class="form-group"><label>وصف الثوب</label><input type="text" id="client-fabric"></div>
+                    <hr class="divider">
+                    <div class="form-group"><label>📸 صورة الكسوة (اختياري)</label>
+                        <div class="image-upload-group" style="display:flex; gap:6px;">
+                            <button type="button" class="btn btn-outline btn-sm" id="form-capture-btn">📷 التقاط</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="form-gallery-btn">🖼️ الألبوم</button>
+                        </div>
+                        <img id="form-image-preview" class="image-preview" alt="معاينة">
+                        <input type="file" id="form-image-input" class="hidden-file-input" accept="image/*">
+                    </div>
+                    <hr class="divider">
+                    <p style="font-weight:700;">📏 المقاسات (cm)</p>
+                    <div class="form-group"><label>الكتاف كامليين</label><input type="number" id="cl-shoulders" required></div>
+                    <div class="form-group"><label>دورة الصدر كاملة</label><input type="number" id="cl-chest" required></div>
+                    <div class="form-group"><label>دورة الحزام كاملة</label><input type="number" id="cl-waist" required></div>
+                    <div class="form-group"><label>دورة الحوض</label><input type="number" id="cl-hips" required></div>
+                    <div class="form-group"><label>الطول الإجمالي</label><input type="number" id="cl-dressLength" required></div>
+                    <div class="form-group"><label>طول الكم</label><input type="number" id="cl-sleeveLength" required></div>
+                    <div class="form-group"><label>نوع القصة</label><select id="cl-fitType" required><option value="">-- اختاري --</option><option value="regular">عادي (+3)</option><option value="fitted">مضبوط (+1.5)</option><option value="loose">فضفاض (+5)</option><option value="custom">مخصص</option></select></div>
+                    <div class="form-group custom-ease-input" id="cl-customEaseGroup"><label>قيمة الاتساع المخصصة</label><input type="number" id="cl-customEase" step="0.1"></div>
+                    <div class="form-group"><label>تاريخ التسليم *</label><input type="date" id="cl-deliveryDate" required></div>
+                    <button type="submit" class="btn btn-primary">💾 حفظ الكليانة</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 لائحة الكليانات</div>
+                <div class="search-bar"><span class="search-icon">🔎</span><input type="text" id="client-search" placeholder="ابحثي بالإسم"></div>
+                <div class="filter-panel" id="date-filter-panel" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+                    <button class="btn btn-pill active-filter" data-filter="all">📋 كلشي</button>
+                    <button class="btn btn-pill" data-filter="this-week">📅 هاد السيمانة</button>
+                    <button class="btn btn-pill" data-filter="last-week">⬅️ اللي فاتت</button>
+                    <button class="btn btn-pill" data-filter="this-month">🗓️ هاد الشهر</button>
+                    <button class="btn btn-pill" data-filter="custom">📆 تحديد تاريخ</button>
+                </div>
+                <div class="custom-date-range-group" id="custom-date-range-group" style="display:none; gap:6px; margin-bottom:8px;">
+                    <span>من:</span><input type="date" id="filter-date-from">
+                    <span>إلى:</span><input type="date" id="filter-date-to">
+                    <button class="btn btn-sm btn-outline" id="apply-custom-filter">✅ طبق</button>
+                    <button class="btn btn-sm" id="clear-custom-filter">🗑️ رجّع</button>
+                </div>
+                <div id="clients-list-container"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">💾 أدوات البيانات</div>
+                <button class="btn btn-outline btn-sm" id="export-btn">📤 تصدير</button>
+                <button class="btn btn-outline btn-sm" id="import-btn">📥 استيراد</button>
+                <input type="file" id="import-file-input" class="hidden-file-input" accept=".json">
+            </div>
+        </section>
+
+        <!-- TAB 2: CALCULATOR -->
+        <section class="tab-content" id="tab-calculator">
+            <div class="card accent-top">
+                <div class="card-header"><span class="icon">📐</span> حاسبة الفصالة الذكية</div>
+                <form id="calculator-form" autocomplete="off">
+                    <div class="form-group"><label>الكتاف كامليين <span class="unit">(cm)</span></label><input type="number" id="calc-shoulders" placeholder="مثال: 42" step="0.1" min="20" max="80" required></div>
+                    <div class="form-group"><label>دورة الصدر كاملة <span class="unit">(cm)</span></label><input type="number" id="calc-chest" placeholder="مثال: 96" step="0.1" min="50" max="180" required></div>
+                    <div class="form-group"><label>دورة الحزام كاملة <span class="unit">(cm)</span></label><input type="number" id="calc-waist" placeholder="مثال: 78" step="0.1" min="40" max="160" required></div>
+                    <div class="form-group"><label>دورة الحوض / الأوراك <span class="unit">(cm)</span></label><input type="number" id="calc-hips" placeholder="مثال: 104" step="0.1" min="50" max="180" required></div>
+                    <div class="form-group"><label>الطول الإجمالي للبيسة <span class="unit">(cm)</span></label><input type="number" id="calc-dressLength" placeholder="مثال: 140" step="0.1" min="40" max="250" required></div>
+                    <div class="form-group"><label>طول الكم <span class="unit">(cm)</span></label><input type="number" id="calc-sleeveLength" placeholder="مثال: 58" step="0.1" min="10" max="100" required></div>
+                    <div class="form-group"><label>نوع قصة الثوب والاتساع</label><select id="calc-fitType" required><option value="">-- اختاري --</option><option value="regular">عادي / مريح (+3 cm)</option><option value="fitted">مضبوط / ضيّق (+1.5 cm)</option><option value="loose">فضفاض / واسع (+5 cm)</option><option value="custom">مخصص</option></select></div>
+                    <div class="form-group custom-ease-input" id="calc-customEaseGroup"><label>قيمة الاتساع المخصصة</label><input type="number" id="calc-customEase" step="0.1" min="0"></div>
+                    <button type="submit" class="btn btn-primary">🧮 احسبي القصّات</button>
+                </form>
+            </div>
+            <div class="card gold-top" id="results-card" style="display:none;">
+                <div class="card-header">✨ نتائج القصّات</div>
+                <div class="results-grid" id="results-grid"></div>
+            </div>
+        </section>
+
+        <!-- TAB 3: AGENDA -->
+        <section class="tab-content" id="tab-agenda">
+            <div class="card accent-top">
+                <div class="card-header">📋 أجندة المواعيد الذكية</div>
+                <div id="agenda-active-list"></div>
+            </div>
+            <div class="card">
+                <button class="collapsible-toggle" id="completed-toggle">✅ الطلبيات المسلّمة <span id="completed-count">(0)</span></button>
+                <div class="collapsible-content" id="completed-content"><div id="agenda-completed-list"></div></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODALS -->
+    <div id="cuts-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header"><span>🧮 قص الفصالة</span><button class="modal-close" id="close-cuts-modal">&times;</button></div>
+            <div id="cuts-modal-body"></div>
+        </div>
+    </div>
+
+    <div id="image-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content modal-small">
+            <div class="modal-header"><span>📸 صورة الكسوة</span><button class="modal-close" id="close-image-modal">&times;</button></div>
+            <img id="image-modal-img" style="width:100%; border-radius:12px; margin-bottom:12px;" src="" alt="صورة">
+            <div style="display:flex; gap:6px;">
+                <button class="btn btn-outline btn-sm" id="modal-camera-btn">📷 كاميرا</button>
+                <button class="btn btn-outline btn-sm" id="modal-gallery-btn">🖼️ الألبوم</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="date-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content modal-small">
+            <div class="modal-header"><span>📅 تعديل تاريخ التسليم</span><button class="modal-close" id="close-date-modal">&times;</button></div>
+            <input type="date" id="date-modal-input" style="margin-bottom:12px;">
+            <button class="btn btn-primary" id="save-date-btn">💾 حفظ</button>
+        </div>
+    </div>
+
+    <!-- ====================== كود JavaScript الكامل ====================== -->
+    <script>
+        (function() {
+            // ════════════ IndexedDB ════════════
+            const DB_NAME = 'FessalaAppDB', STORE_NAME = 'clients';
+            function openDB() {
+                return new Promise((resolve, reject) => {
+                    const req = indexedDB.open(DB_NAME, 1);
+                    req.onupgradeneeded = e => { if (!e.target.result.objectStoreNames.contains(STORE_NAME)) e.target.result.createObjectStore(STORE_NAME, { keyPath: 'id' }); };
+                    req.onsuccess = () => resolve(req.result);
+                    req.onerror = () => reject(req.error);
+                });
+            }
+            async function getClients() { const db = await openDB(); return new Promise((res, rej) => { const tx = db.transaction(STORE_NAME,'readonly'); const r = tx.objectStore(STORE_NAME).getAll(); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
+            async function saveClient(client) { const db = await openDB(); return new Promise((res, rej) => { const tx = db.transaction(STORE_NAME,'readwrite'); tx.objectStore(STORE_NAME).put(client); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); }); }
+            async function deleteClientFromDB(id) { const db = await openDB(); return new Promise((res, rej) => { const tx = db.transaction(STORE_NAME,'readwrite'); tx.objectStore(STORE_NAME).delete(id); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); }); }
+
+            function compressImage(file, maxWidth=800, quality=0.6) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        const img = new Image();
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            let w=img.width, h=img.height;
+                            if(w>maxWidth){ h=(h*maxWidth)/w; w=maxWidth; }
+                            canvas.width=w; canvas.height=h;
+                            canvas.getContext('2d').drawImage(img,0,0,w,h);
+                            resolve(canvas.toDataURL('image/jpeg', quality));
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            const EASE_MAP = { regular:3, fitted:1.5, loose:5 };
+            function getEaseValue(ft, ce) { return ft==='custom'? parseFloat(ce)||0 : EASE_MAP[ft]||0; }
+            function calculateCuts(m, ft, ce) {
+                const ease = getEaseValue(ft, ce);
+                return {
+                    shoulderCut: (m.shoulders/2)+1,
+                    chestCut: (m.chest/4)+ease,
+                    waistCut: (m.waist/4)+ease,
+                    hipsCut: (m.hips/4)+ease,
+                    finalDressLength: m.dressLength+6,
+                    finalSleeveLength: m.sleeveLength+3,
+                    easeUsed: ease
+                };
+            }
+            function formatNumber(v) { return parseFloat(v.toFixed(2)); }
+            function getUrgencyInfo(dateStr) {
+                const today = new Date(); today.setHours(0,0,0,0);
+                const d = new Date(dateStr+'T00:00:00');
+                const diff = Math.ceil((d-today)/86400000);
+                if(diff<=3) return { level:'red', label:'🚨 مزروب', className:'urgency-red', badgeClass:'badge-red', daysLeft:diff };
+                if(diff<=14) return { level:'orange', label:'🟠 متوسط', className:'urgency-orange', badgeClass:'badge-orange', daysLeft:diff };
+                return { level:'green', label:'🟢 باقي الوقت', className:'urgency-green', badgeClass:'badge-green', daysLeft:diff };
+            }
+
+            // ════════════ المتغيرات العالمية ════════════
+            const App = window.Capacitor?.Plugins?.App;
+            const LocalNotifications = window.Capacitor?.Plugins?.LocalNotifications;
+            const ForegroundService = window.Capacitor?.Plugins?.ForegroundService;
+
+            // ════════════ الخدمة الأمامية (الإشعار الدائم) ════════════
+            async function startOrUpdateForegroundService() {
+                if (!ForegroundService) {
+                    // fallback للمتصفح: إشعار عادي غير دائم
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        const clients = await getClients();
+                        const today = new Date(); today.setHours(0,0,0,0);
+                        const todayStr = today.toISOString().split('T')[0];
+                        const todayClients = clients.filter(c => !c.completed && c.deliveryDate === todayStr);
+                        const count = todayClients.length;
+                        const title = count === 0 ? '✅ لا توجد طلبيات اليوم' : `🧵 اليوم عندك ${count} طلبية`;
+                        const body = count > 0 ? todayClients.map(c => c.name).join('، ') : 'كلشي مزيان، رتّحي بالك';
+                        new Notification(title, { body, requireInteraction: true });
+                    }
+                    return;
+                }
+                try {
+                    const clients = await getClients();
+                    const today = new Date(); today.setHours(0,0,0,0);
+                    const todayStr = today.toISOString().split('T')[0];
+                    const todayClients = clients.filter(c => !c.completed && c.deliveryDate === todayStr);
+                    const count = todayClients.length;
+
+                    const title = count === 0 
+                        ? '✅ لا توجد طلبيات اليوم' 
+                        : `🧵 اليوم عندك ${count} طلبية`;
+                    const body = count > 0 
+                        ? todayClients.map(c => c.name).join('، ') 
+                        : 'كلشي مزيان، رتّحي بالك';
+
+                    await ForegroundService.startForegroundService({
+                        notificationId: 123456789,
+                        channelId: 'fessala-service-channel',
+                        channelName: 'الخدمة الأمامية',
+                        title: title,
+                        text: body,
+                        icon: 'ic_launcher',
+                        importance: 3,
+                        ongoing: true,
+                        autoCancel: false
+                    });
+                    console.log('✅ تم تحديث الإشعار الدائم');
+                } catch (error) {
+                    console.error('فشل بدء الخدمة الأمامية:', error);
+                }
+            }
+
+            // ════════════ إشعارات التذكير المجدولة ════════════
+            async function scheduleNotificationForClient(client) {
+                if (client.completed || !LocalNotifications) return;
+                try {
+                    await LocalNotifications.requestPermissions();
+                    const dateParts = client.deliveryDate.split('-');
+                    const scheduledTime = new Date(+dateParts[0], +dateParts[1]-1, +dateParts[2], 8, 0, 0);
+                    if (scheduledTime < new Date()) scheduledTime.setDate(scheduledTime.getDate() + 1);
+
+                    const notifId = parseInt(client.id.replace(/\D/g, '').slice(-8) + Date.now().toString().slice(-4)) || Math.floor(Math.random() * 1000000);
+                    if (client.notificationId) {
+                        try { await LocalNotifications.cancel({ notifications: [{ id: client.notificationId }] }); } catch (e) {}
+                    }
+
+                    await LocalNotifications.schedule({
+                        notifications: [{
+                            id: notifId,
+                            title: `🧵 ${client.name} - اليوم هو موعد التسليم!`,
+                            body: `${client.fabricNotes || 'بدون وصف'} | 📅 ${client.deliveryDate}`,
+                            schedule: { at: scheduledTime },
+                            ongoing: false,
+                            autoCancel: false,
+                            extra: { clientId: client.id, action: 'view-client' }
+                        }]
+                    });
+                    client.notificationId = notifId;
+                    await saveClient(client);
+                } catch (error) {
+                    console.error('فشل جدولة الإشعار:', error);
+                }
+            }
+
+            async function scheduleAllNotifications() {
+                const clients = await getClients();
+                for (const client of clients) {
+                    if (!client.completed) await scheduleNotificationForClient(client);
+                    else if (client.notificationId && LocalNotifications) {
+                        try { await LocalNotifications.cancel({ notifications: [{ id: client.notificationId }] }); delete client.notificationId; await saveClient(client); } catch (e) {}
+                    }
+                }
+            }
+
+            // ════════════ معالج زر الرجوع ════════════
+            if (App) {
+                App.addListener('backButton', ({ canGoBack }) => {
+                    const cutsModal = document.getElementById('cuts-modal');
+                    const imageModal = document.getElementById('image-modal');
+                    const dateModal = document.getElementById('date-modal');
+                    if (cutsModal.style.display === 'flex') {
+                        cutsModal.style.display = 'none';
+                        return;
+                    }
+                    if (imageModal.style.display === 'flex') {
+                        imageModal.style.display = 'none';
+                        return;
+                    }
+                    if (dateModal.style.display === 'flex') {
+                        dateModal.style.display = 'none';
+                        return;
+                    }
+                    const activeTab = document.querySelector('.tab-btn.active');
+                    if (activeTab && activeTab.dataset.tab !== 'clients') {
+                        switchTab('clients');
+                        return;
+                    }
+                    App.exitApp();
+                });
+            }
+
+            // ════════════ أدوات التصدير والاستيراد ════════════
+            async function exportAllData() {
+                const clients = await getClients();
+                const blob = new Blob([JSON.stringify(clients,null,2)], {type:'application/json'});
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+                a.download = `fessala-backup-${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                showToast('✅ تم التصدير');
+            }
+            async function importDataFromJSON(file) {
+                const reader = new FileReader();
+                reader.onload = async e => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if(!Array.isArray(data)) throw new Error('');
+                        for(const c of data) {
+                            delete c.notificationId;
+                            await saveClient(c);
+                        }
+                        await scheduleAllNotifications();
+                        await startOrUpdateForegroundService();
+                        renderClientList(); renderAgenda();
+                        showToast('📥 تم الاستيراد');
+                    } catch { showToast('⚠️ فشل الاستيراد'); }
+                };
+                reader.readAsText(file);
+            }
+
+            // ════════════ عناصر DOM الأساسية ════════════
+            let activeDateFilter='all', customFilterFrom=null, customFilterTo=null;
+            const dateFilterPanel = document.getElementById('date-filter-panel');
+            const customDateRangeGroup = document.getElementById('custom-date-range-group');
+            const filterDateFrom = document.getElementById('filter-date-from');
+            const filterDateTo = document.getElementById('filter-date-to');
+            const clientSearch = document.getElementById('client-search');
+            const clientsListContainer = document.getElementById('clients-list-container');
+            const agendaActiveList = document.getElementById('agenda-active-list');
+            const agendaCompletedList = document.getElementById('agenda-completed-list');
+            const completedCountSpan = document.getElementById('completed-count');
+            const formImageInput = document.getElementById('form-image-input');
+            const formImagePreview = document.getElementById('form-image-preview');
+            let selectedImageBase64 = null;
+
+            function showToast(msg) {
+                const old = document.querySelector('.toast'); if(old) old.remove();
+                const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+                document.body.appendChild(t); setTimeout(()=>t.remove(), 2600);
+            }
+            function escapeHTML(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+            function getFitTypeLabel(ft, ce) { return ft==='regular'?'عادي (+3)':ft==='fitted'?'مضبوط (+1.5)':ft==='loose'?'فضفاض (+5)':ft==='custom'?`مخصص (+${ce||0})`:ft; }
+            function getActiveFilterLabel() { return activeDateFilter==='this-week'?'هاد السيمانة':activeDateFilter==='last-week'?'اللي فاتت':activeDateFilter==='this-month'?'هاد الشهر':activeDateFilter==='custom'?'التاريخ المحدد':'كلشي'; }
+            function getWeekMonday(d){ const r=new Date(d); r.setDate(r.getDate()-(r.getDay()||7)+1); r.setHours(0,0,0,0); return r; }
+            function getWeekSunday(m){ const r=new Date(m); r.setDate(r.getDate()+6); r.setHours(23,59,59,999); return r; }
+            function getDateFilterFunction() {
+                const today=new Date(); today.setHours(0,0,0,0);
+                switch(activeDateFilter) {
+                    case 'this-week': { const m=getWeekMonday(today), s=getWeekSunday(m); return c=>c.deliveryDate && new Date(c.deliveryDate+'T00:00:00')>=m && new Date(c.deliveryDate+'T00:00:00')<=s; }
+                    case 'last-week': { const lm=new Date(getWeekMonday(today)); lm.setDate(lm.getDate()-7); const ls=getWeekSunday(lm); return c=>c.deliveryDate && new Date(c.deliveryDate+'T00:00:00')>=lm && new Date(c.deliveryDate+'T00:00:00')<=ls; }
+                    case 'this-month': { const ms=new Date(today.getFullYear(), today.getMonth(),1), me=new Date(today.getFullYear(), today.getMonth()+1,0,23,59,59,999); return c=>c.deliveryDate && new Date(c.deliveryDate+'T00:00:00')>=ms && new Date(c.deliveryDate+'T00:00:00')<=me; }
+                    case 'custom': { const f=customFilterFrom?new Date(customFilterFrom+'T00:00:00'):null, t=customFilterTo?new Date(customFilterTo+'T23:59:59.999'):null; return c=>{ if(!c.deliveryDate) return false; const d=new Date(c.deliveryDate+'T00:00:00'); if(f&&d<f) return false; if(t&&d>t) return false; return true; }; }
+                    default: return ()=>true;
+                }
+            }
+            function setActiveDateFilter(filterName) {
+                activeDateFilter=filterName;
+                dateFilterPanel.querySelectorAll('.btn-pill').forEach(p=>p.classList.remove('active-filter'));
+                const ap=dateFilterPanel.querySelector(`[data-filter="${filterName}"]`); if(ap) ap.classList.add('active-filter');
+                if(filterName==='custom') customDateRangeGroup.style.display='flex';
+                else { customDateRangeGroup.style.display='none'; customFilterFrom=null; customFilterTo=null; filterDateFrom.value=''; filterDateTo.value=''; }
+                renderClientList();
+            }
+
+            function buildClientCardHTML(client) {
+                const urgency = getUrgencyInfo(client.deliveryDate);
+                const daysText = urgency.daysLeft<0?`(تأخر بـ ${Math.abs(urgency.daysLeft)} يوم)`:urgency.daysLeft===0?'(اليوم هو التسليم!)':`(باقي ${urgency.daysLeft} يوم)`;
+                const imgHTML = client.image?`<img src="${client.image}" class="client-image" data-client-id="${client.id}">`:`<div style="margin:8px 0; color:var(--text-muted);">📷 لا توجد صورة</div>`;
+                const uploadBtns = (!client.image && !client.completed)?`<div style="display:flex; gap:6px;"><button class="btn btn-sm btn-outline capture-btn" data-client-id="${client.id}">📷 التقاط</button><button class="btn btn-sm btn-outline gallery-btn" data-client-id="${client.id}">🖼️ الألبوم</button></div>`:'';
+                return `
+                <div class="client-card ${client.completed?'':urgency.className}" data-client-id="${client.id}">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div class="client-name">👤 ${escapeHTML(client.name)} ${!client.completed?`<span class="urgency-badge ${urgency.badgeClass}">${urgency.label} ${daysText}</span>`:'<span class="urgency-badge badge-green">✅ مسلّمة</span>'}</div>
+                        <button class="more-btn" data-client-id="${client.id}">⋮</button>
+                    </div>
+                    ${client.location?`<div>📍 ${escapeHTML(client.location)}</div>`:''}
+                    <div class="client-details">
+                        ${client.phone?`<span>📞 ${escapeHTML(client.phone)}</span>`:''}
+                        ${client.fabricNotes?`<span>🧵 ${escapeHTML(client.fabricNotes)}</span>`:''}
+                        <span>📅 ${client.deliveryDate}</span><span>📏 ${getFitTypeLabel(client.fitType, client.customEase)}</span>
+                    </div>
+                    ${imgHTML} ${uploadBtns}
+                    <div class="client-details">
+                        <span>👚 الصدر: ${client.measurements.chest} cm</span><span>⏳ الحزام: ${client.measurements.waist} cm</span>
+                        <span>🍑 الحوض: ${client.measurements.hips} cm</span><span>📏 الطول: ${client.measurements.dressLength} cm</span>
+                    </div>
+                    <div class="card-actions">
+                        ${!client.completed?`<button class="btn btn-success btn-sm deliver-btn" data-client-id="${client.id}">✅ تم التسليم</button>`:''}
+                        <button class="btn btn-sm btn-primary calc-cuts-btn" data-client-id="${client.id}">🧮 قص الفصالة</button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-client-id="${client.id}">🗑️ حذف</button>
+                    </div>
+                </div>`;
+            }
+
+            function showContextMenu(clientId, event) {
+                event.stopPropagation();
+                const existing = document.querySelector('.context-menu');
+                if(existing) existing.remove();
+                const menu = document.createElement('div');
+                menu.className = 'context-menu active';
+                menu.style.top = `${Math.min(event.clientY, window.innerHeight-150)}px`;
+                menu.style.left = `${Math.min(event.clientX, window.innerWidth-170)}px`;
+                menu.innerHTML = `
+                    <button data-action="postpone">📅 تأجيل يوم</button>
+                    <button data-action="edit-date">🗓️ تعديل التاريخ</button>
+                    <button data-action="edit-image">🖼️ تعديل الصورة</button>
+                `;
+                document.body.appendChild(menu);
+                menu.querySelectorAll('button').forEach(btn => btn.addEventListener('click', async (e) => {
+                    const action = e.target.dataset.action;
+                    if(action === 'postpone') await postponeOneDay(clientId);
+                    else if(action === 'edit-date') openDateModal(clientId);
+                    else if(action === 'edit-image') openImageModal(clientId);
+                    menu.remove();
+                }));
+                setTimeout(() => {
+                    const closeMenu = (e) => { if(!menu.contains(e.target)) { menu.remove(); document.removeEventListener('click', closeMenu); } };
+                    document.addEventListener('click', closeMenu);
+                }, 100);
+            }
+
+            async function postponeOneDay(clientId) {
+                const clients = await getClients();
+                const client = clients.find(c=>c.id===clientId);
+                if(!client) return;
+                const oldDate = new Date(client.deliveryDate+'T00:00:00');
+                oldDate.setDate(oldDate.getDate()+1);
+                client.deliveryDate = oldDate.toISOString().split('T')[0];
+                await saveClient(client);
+                await scheduleNotificationForClient(client);
+                await startOrUpdateForegroundService();
+                renderClientList(); renderAgenda();
+                showToast('📅 تم تأجيل يوم');
+            }
+
+            function openDateModal(clientId) {
+                const modal = document.getElementById('date-modal');
+                const input = document.getElementById('date-modal-input');
+                modal.style.display = 'flex';
+                getClients().then(clients=>{
+                    const client = clients.find(c=>c.id===clientId);
+                    if(client) input.value = client.deliveryDate;
+                });
+                document.getElementById('save-date-btn').onclick = async () => {
+                    const newDate = input.value;
+                    if(!newDate) return;
+                    const clients = await getClients();
+                    const client = clients.find(c=>c.id===clientId);
+                    if(client){ client.deliveryDate = newDate; await saveClient(client); await scheduleNotificationForClient(client); await startOrUpdateForegroundService(); renderClientList(); renderAgenda(); showToast('📅 تم تعديل التاريخ'); }
+                    modal.style.display = 'none';
+                };
+                document.getElementById('close-date-modal').onclick = () => modal.style.display = 'none';
+            }
+
+            function openCutsModal(client) {
+                const modal = document.getElementById('cuts-modal');
+                const body = document.getElementById('cuts-modal-body');
+                const cuts = calculateCuts(client.measurements, client.fitType, client.customEase);
+                const ease = cuts.easeUsed;
+                body.innerHTML = `
+                    <p><strong>${escapeHTML(client.name)}</strong> | ${getFitTypeLabel(client.fitType, client.customEase)}</p>
+                    <div class="form-group"><label>إضافة الصدر</label><input type="number" id="modal-chest-ease" value="${ease}" step="0.1"></div>
+                    <div class="form-group"><label>إضافة الحزام</label><input type="number" id="modal-waist-ease" value="${ease}" step="0.1"></div>
+                    <div class="form-group"><label>إضافة الحوض</label><input type="number" id="modal-hips-ease" value="${ease}" step="0.1"></div>
+                    <div class="form-group"><label>إضافة الكم</label><input type="number" id="modal-sleeve-ease" value="3" step="0.1"></div>
+                    <div class="form-group"><label>إضافة الطول</label><input type="number" id="modal-dress-ease" value="6" step="0.1"></div>
+                    <div id="modal-results" class="results-grid"></div>
+                    <button class="btn btn-outline btn-sm" id="modal-back-btn" style="margin-top:12px;">🔙 رجوع</button>
+                `;
+                function update() {
+                    const ce=parseFloat(document.getElementById('modal-chest-ease').value)||0;
+                    const we=parseFloat(document.getElementById('modal-waist-ease').value)||0;
+                    const he=parseFloat(document.getElementById('modal-hips-ease').value)||0;
+                    const se=parseFloat(document.getElementById('modal-sleeve-ease').value)||0;
+                    const de=parseFloat(document.getElementById('modal-dress-ease').value)||0;
+                    const m=client.measurements;
+                    const res=[
+                        {label:'قص الكتاف',value:formatNumber((m.shoulders/2)+1)},
+                        {label:'قص الصدر',value:formatNumber((m.chest/4)+ce)},
+                        {label:'قص الحزام',value:formatNumber((m.waist/4)+we)},
+                        {label:'قص الحوض',value:formatNumber((m.hips/4)+he)},
+                        {label:'الطول النهائي',value:formatNumber(m.dressLength+de)},
+                        {label:'طول الكم',value:formatNumber(m.sleeveLength+se)}
+                    ];
+                    document.getElementById('modal-results').innerHTML = res.map(r=>`<div class="result-item"><div class="result-label">${r.label}</div><div class="result-value">${r.value} cm</div></div>`).join('');
+                }
+                body.querySelectorAll('input').forEach(i=>i.addEventListener('input',update));
+                update();
+                document.getElementById('modal-back-btn').addEventListener('click',()=>modal.style.display='none');
+                modal.style.display='flex';
+            }
+
+            function openImageModal(clientId) {
+                const modal = document.getElementById('image-modal');
+                const img = document.getElementById('image-modal-img');
+                getClients().then(clients=>{
+                    const client = clients.find(c=>c.id===clientId);
+                    if(!client || !client.image) { modal.style.display='none'; return; }
+                    img.src = client.image;
+                    modal.style.display='flex';
+                });
+                document.getElementById('modal-camera-btn').onclick = async () => {
+                    const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.capture='environment';
+                    input.onchange = async e => {
+                        const file = e.target.files[0]; if(!file) return;
+                        const compressed = await compressImage(file);
+                        const clients = await getClients(); const client = clients.find(c=>c.id===clientId);
+                        if(client){ client.image = compressed; await saveClient(client); img.src = compressed; renderClientList(); renderAgenda(); showToast('📸 تم تعديل الصورة'); }
+                    };
+                    input.click();
+                };
+                document.getElementById('modal-gallery-btn').onclick = async () => {
+                    const input = document.createElement('input'); input.type='file'; input.accept='image/*';
+                    input.onchange = async e => {
+                        const file = e.target.files[0]; if(!file) return;
+                        const compressed = await compressImage(file);
+                        const clients = await getClients(); const client = clients.find(c=>c.id===clientId);
+                        if(client){ client.image = compressed; await saveClient(client); img.src = compressed; renderClientList(); renderAgenda(); showToast('🖼️ تم تعديل الصورة'); }
+                    };
+                    input.click();
+                };
+                document.getElementById('close-image-modal').onclick = () => modal.style.display = 'none';
+            }
+
+            // ════════════ ربط أحداث البطاقات ════════════
+            function attachClientCardListeners() {
+                document.querySelectorAll('.more-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => showContextMenu(btn.dataset.clientId, e));
+                });
+                document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async function() {
+                    const id = this.dataset.clientId;
+                    const clients = await getClients(); const client = clients.find(c=>c.id===id);
+                    if(!client) return;
+                    if(confirm(`حذف "${client.name}"؟`)) {
+                        if (client.notificationId && LocalNotifications) {
+                            try { await LocalNotifications.cancel({ notifications: [{ id: client.notificationId }] }); } catch (e) {}
+                        }
+                        await deleteClientFromDB(id);
+                        await startOrUpdateForegroundService();
+                        renderClientList(); renderAgenda();
+                        showToast('🗑️ تم الحذف');
+                    }
+                }));
+                document.querySelectorAll('.deliver-btn').forEach(btn => btn.addEventListener('click', async function() {
+                    const id = this.dataset.clientId;
+                    const clients = await getClients(); const client = clients.find(c=>c.id===id);
+                    if(!client) return;
+                    if(confirm(`تأكيد تسليم "${client.name}"؟`)) {
+                        if (client.notificationId && LocalNotifications) {
+                            try { await LocalNotifications.cancel({ notifications: [{ id: client.notificationId }] }); } catch (e) {}
+                        }
+                        client.completed=true;
+                        client.completedAt=new Date().toISOString();
+                        delete client.image;
+                        delete client.notificationId;
+                        await saveClient(client);
+                        await startOrUpdateForegroundService();
+                        renderClientList(); renderAgenda();
+                        showToast('🎉 تم التسليم');
+                    }
+                }));
+                document.querySelectorAll('.calc-cuts-btn').forEach(btn => btn.addEventListener('click', async function() {
+                    const id = this.dataset.clientId;
+                    const clients = await getClients(); const client = clients.find(c=>c.id===id);
+                    if(client) openCutsModal(client);
+                }));
+                document.querySelectorAll('.client-image').forEach(img => img.addEventListener('click', async function() {
+                    const id = this.dataset.clientId;
+                    openImageModal(id);
+                }));
+                document.querySelectorAll('.capture-btn, .gallery-btn').forEach(btn => btn.addEventListener('click', async function() {
+                    const id = this.dataset.clientId;
+                    const input = document.createElement('input'); input.type='file'; input.accept='image/*';
+                    if(this.classList.contains('capture-btn')) input.capture='environment';
+                    input.onchange = async e => {
+                        const file = e.target.files[0]; if(!file) return;
+                        const compressed = await compressImage(file);
+                        const clients = await getClients(); const client = clients.find(c=>c.id===id);
+                        if(client){ client.image = compressed; await saveClient(client); renderClientList(); renderAgenda(); showToast('📸 تم الحفظ'); }
+                    };
+                    input.click();
+                }));
+            }
+
+            async function renderClientList() {
+                const clients = await getClients();
+                const searchTerm = clientSearch.value.trim().toLowerCase();
+                const filterFn = getDateFilterFunction();
+                let filtered = clients.filter(filterFn);
+                if(searchTerm) filtered = filtered.filter(c=>c.name.toLowerCase().includes(searchTerm));
+                filtered.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+                if(filtered.length===0) clientsListContainer.innerHTML = `<p class="no-clients">ما كايناش كليانات فـ "${getActiveFilterLabel()}"</p>`;
+                else clientsListContainer.innerHTML = filtered.map(c=>buildClientCardHTML(c)).join('');
+                attachClientCardListeners();
+            }
+
+            async function renderAgenda() {
+                const clients = await getClients();
+                const active = clients.filter(c=>!c.completed).sort((a,b)=>new Date(a.deliveryDate)-new Date(b.deliveryDate));
+                const completed = clients.filter(c=>c.completed).sort((a,b)=>new Date(b.completedAt||b.createdAt)-new Date(a.completedAt||a.createdAt));
+                agendaActiveList.innerHTML = active.length?active.map(c=>buildClientCardHTML(c)).join(''):'<p class="no-clients">كلشي مسلّم! 🎉</p>';
+                agendaCompletedList.innerHTML = completed.length?completed.map(c=>buildClientCardHTML(c)).join(''):'<p class="no-clients">ما كايناش مسلّمات.</p>';
+                completedCountSpan.textContent = `(${completed.length})`;
+                attachClientCardListeners();
+            }
+
+            function switchTab(tabName) {
+                document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tabName));
+                document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+                document.getElementById(`tab-${tabName}`).classList.add('active');
+                if(tabName==='clients') renderClientList();
+                if(tabName==='agenda') renderAgenda();
+            }
+            document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click', ()=>switchTab(b.dataset.tab)));
+
+            // Calculator
+            document.getElementById('calc-fitType').addEventListener('change', function(){ document.getElementById('calc-customEaseGroup').classList.toggle('visible', this.value==='custom'); });
+            document.getElementById('calculator-form').addEventListener('submit', function(e){
+                e.preventDefault();
+                const ft=document.getElementById('calc-fitType').value; if(!ft) return showToast('⚠️ اختاري القصة');
+                const ease=ft==='custom'?parseFloat(document.getElementById('calc-customEase').value)||0:EASE_MAP[ft];
+                const m={ shoulders:parseFloat(document.getElementById('calc-shoulders').value), chest:parseFloat(document.getElementById('calc-chest').value), waist:parseFloat(document.getElementById('calc-waist').value), hips:parseFloat(document.getElementById('calc-hips').value), dressLength:parseFloat(document.getElementById('calc-dressLength').value), sleeveLength:parseFloat(document.getElementById('calc-sleeveLength').value) };
+                const cuts=calculateCuts(m,ft,ease);
+                const items=[ {label:'قص الكتاف',value:formatNumber(cuts.shoulderCut)}, {label:'قص الصدر',value:formatNumber(cuts.chestCut)}, {label:'قص الحزام',value:formatNumber(cuts.waistCut)}, {label:'قص الحوض',value:formatNumber(cuts.hipsCut)}, {label:'الطول النهائي',value:formatNumber(cuts.finalDressLength)}, {label:'طول الكم',value:formatNumber(cuts.finalSleeveLength)} ];
+                document.getElementById('results-grid').innerHTML=items.map(i=>`<div class="result-item"><div class="result-label">${i.label}</div><div class="result-value">${i.value} cm</div></div>`).join('');
+                document.getElementById('results-card').style.display='block';
+            });
+
+            // Client form image
+            document.getElementById('form-capture-btn').addEventListener('click',()=>{ formImageInput.capture='environment'; formImageInput.click(); });
+            document.getElementById('form-gallery-btn').addEventListener('click',()=>{ formImageInput.removeAttribute('capture'); formImageInput.click(); });
+            formImageInput.addEventListener('change', async e=>{ const file=e.target.files[0]; if(!file) return; const compressed=await compressImage(file); selectedImageBase64=compressed; formImagePreview.src=compressed; formImagePreview.classList.add('visible'); });
+
+            document.getElementById('cl-fitType').addEventListener('change', function(){ document.getElementById('cl-customEaseGroup').classList.toggle('visible', this.value==='custom'); });
+            document.getElementById('client-form').addEventListener('submit', async function(e){
+                e.preventDefault();
+                const ft=document.getElementById('cl-fitType').value; if(!ft) return showToast('⚠️ اختاري القصة');
+                const ce=ft==='custom'?parseFloat(document.getElementById('cl-customEase').value)||0:null;
+                const client = {
+                    id:'cl_'+Date.now()+'_'+Math.random().toString(36).substr(2,8),
+                    name:document.getElementById('client-name').value.trim(),
+                    location:document.getElementById('client-location').value.trim(),
+                    phone:document.getElementById('client-phone').value.trim(),
+                    fabricNotes:document.getElementById('client-fabric').value.trim(),
+                    measurements:{ shoulders:parseFloat(document.getElementById('cl-shoulders').value), chest:parseFloat(document.getElementById('cl-chest').value), waist:parseFloat(document.getElementById('cl-waist').value), hips:parseFloat(document.getElementById('cl-hips').value), dressLength:parseFloat(document.getElementById('cl-dressLength').value), sleeveLength:parseFloat(document.getElementById('cl-sleeveLength').value) },
+                    fitType:ft, customEase:ce, deliveryDate:document.getElementById('cl-deliveryDate').value,
+                    completed:false, createdAt:new Date().toISOString(), image:selectedImageBase64||null
+                };
+                await saveClient(client);
+                await scheduleNotificationForClient(client);
+                await startOrUpdateForegroundService();
+                this.reset(); document.getElementById('cl-fitType').value=''; selectedImageBase64=null; formImagePreview.classList.remove('visible'); formImagePreview.src='';
+                setActiveDateFilter('all'); renderClientList(); renderAgenda();
+                showToast('✅ تم الحفظ');
+            });
+
+            clientSearch.addEventListener('input', renderClientList);
+            dateFilterPanel.addEventListener('click', e=>{ const p=e.target.closest('.btn-pill'); if(p&&p.dataset.filter) setActiveDateFilter(p.dataset.filter); });
+            document.getElementById('apply-custom-filter').addEventListener('click', ()=>{ customFilterFrom=filterDateFrom.value||null; customFilterTo=filterDateTo.value||null; if(!customFilterFrom&&!customFilterTo) return showToast('⚠️ اختاري تاريخ'); setActiveDateFilter('custom'); showToast('✅ تم التصفية'); });
+            document.getElementById('clear-custom-filter').addEventListener('click', ()=>setActiveDateFilter('all'));
+            filterDateFrom.addEventListener('change', ()=>{ if(activeDateFilter==='custom'){ customFilterFrom=filterDateFrom.value||null; renderClientList(); } });
+            filterDateTo.addEventListener('change', ()=>{ if(activeDateFilter==='custom'){ customFilterTo=filterDateTo.value||null; renderClientList(); } });
+            document.getElementById('completed-toggle').addEventListener('click', function(){ this.classList.toggle('open'); document.getElementById('completed-content').classList.toggle('open'); });
+            document.getElementById('export-btn').addEventListener('click', exportAllData);
+            document.getElementById('import-btn').addEventListener('click', ()=>document.getElementById('import-file-input').click());
+            document.getElementById('import-file-input').addEventListener('change', e=>{ if(e.target.files[0]) importDataFromJSON(e.target.files[0]); });
+
+            document.getElementById('close-cuts-modal').addEventListener('click', ()=>document.getElementById('cuts-modal').style.display='none');
+            document.getElementById('close-image-modal').addEventListener('click', ()=>document.getElementById('image-modal').style.display='none');
+            document.getElementById('close-date-modal').addEventListener('click', ()=>document.getElementById('date-modal').style.display='none');
+
+            // ════════════ التهيئة النهائية ════════════
+            async function init() {
+                switchTab('clients');
+                setActiveDateFilter('all');
+                await renderClientList();
+                await renderAgenda();
+
+                // طلب أذونات الإشعارات (للمتصفح وللأندرويد)
+                if (LocalNotifications) {
+                    await LocalNotifications.requestPermissions();
+                } else if ('Notification' in window && Notification.permission === 'default') {
+                    Notification.requestPermission();
+                }
+
+                await scheduleAllNotifications();
+                await startOrUpdateForegroundService();
+
+                console.log('✅ تم تهيئة التطبيق مع الخدمة الأمامية والإشعارات');
+            }
+
+            if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+            else init();
+        })();
+    </script>
+</body>
+</html>
