@@ -39,7 +39,7 @@ jobs:
           cp node_modules/@capacitor/core/dist/capacitor.js www/js/
           cp node_modules/@capacitor/app/dist/plugin.js www/js/app-plugin.js
           cp node_modules/@capacitor/local-notifications/dist/plugin.js www/js/local-notifications-plugin.js
-          cp node_modules/@capawesome-team/capacitor-foreground-service/dist/plugin.js www/js/foreground-service-plugin.js
+          cp node_modules/@capawesome-team/capacitor-android-foreground-service/dist/plugin.js www/js/foreground-service-plugin.js
 
       - name: ⚙️ إضافة مشروع أندرويد
         run: |
@@ -53,7 +53,7 @@ jobs:
           <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />\
           <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />' "$MANIFEST"
           sed -i '/<\/application>/i \
-          <service android:name="com.capawesome.capacitor.foregroundservice.ForegroundService" android:foregroundServiceType="dataSync" android:exported="false" />' "$MANIFEST"
+          <service android:name="io.capawesome.capacitorjs.plugins.foregroundservice.AndroidForegroundService" android:foregroundServiceType="dataSync" android:exported="false" />' "$MANIFEST"
           echo "✅ تم تعديل AndroidManifest.xml"
 
       - name: 🏗️ بناء الـ APK
