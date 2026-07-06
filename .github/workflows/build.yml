@@ -33,13 +33,13 @@ jobs:
       - name: 📚 تثبيت حزم npm
         run: npm install
 
-      - name: 📋 نسخ مكتبات Capacitor إلى www/js
-        run: |
-          mkdir -p www/js
-          cp node_modules/@capacitor/core/dist/capacitor.js www/js/
-          cp node_modules/@capacitor/app/dist/plugin.js www/js/app-plugin.js
-          cp node_modules/@capacitor/local-notifications/dist/plugin.js www/js/local-notifications-plugin.js
-          cp node_modules/@capawesome/capacitor-foreground-service/dist/plugin.js www/js/foreground-service-plugin.js
+     - name: 📋 نسخ مكتبات Capacitor إلى www/js
+  run: |
+    mkdir -p www/js
+    cp node_modules/@capacitor/core/dist/capacitor.js www/js/
+    cp node_modules/@capacitor/app/dist/plugin.js www/js/app-plugin.js
+    cp node_modules/@capacitor/local-notifications/dist/plugin.js www/js/local-notifications-plugin.js
+    cp node_modules/@capawesome-team/capacitor-foreground-service/dist/plugin.js www/js/foreground-service-plugin.js
 
       - name: ⚙️ تهيئة Capacitor ومشروع أندرويد
         run: |
