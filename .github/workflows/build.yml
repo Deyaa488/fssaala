@@ -24,7 +24,7 @@ jobs:
           java-version: '17'
 
       - name: 📱 تجهيز Android SDK (API 33)
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v2
         with:
           api-level: 33
           build-tools: 33.0.2
@@ -49,12 +49,10 @@ jobs:
       - name: 🔒 إضافة صلاحيات Android (Foreground Service, Notifications)
         run: |
           MANIFEST="android/app/src/main/AndroidManifest.xml"
-          # إضافة الصلاحيات قبل </manifest>
           sed -i '/<\/manifest>/i \
           <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />\
           <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />\
           <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />' "$MANIFEST"
-          # إضافة تعريف الخدمة قبل </application>
           sed -i '/<\/application>/i \
           <service android:name="com.capawesome.capacitor.foregroundservice.ForegroundService" android:foregroundServiceType="dataSync" android:exported="false" />' "$MANIFEST"
           echo "✅ تم تعديل AndroidManifest.xml"
