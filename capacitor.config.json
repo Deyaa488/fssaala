@@ -1,1 +1,17 @@
-
+{
+  "appId": "com.diaa.fessala",
+  "appName": "تطبيق الفصالة",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_launcher",
+      "iconColor": "#C67B5C"
+    },
+    "ForegroundService": {
+      "channelId": "fessala-service-channel",
+      "channelName": "الخدمة الأمامية",
+      "notificationId": 123456789
+    }
+  }
+}
