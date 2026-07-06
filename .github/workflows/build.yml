@@ -10,21 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 استنساخ المستودع
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 🔧 تثبيت Node.js
-        uses: actions/setup-node@v3
+      - name: 🔧 تثبيت Node.js 18
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: 📦 تثبيت Java 17
-        uses: actions/setup-java@v3
+      - name: ☕ تثبيت Java 17
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 📱 تجهيز Android SDK
-        uses: shogo82148/actions-setup-android@v1
+      - name: 📱 تجهيز Android SDK (API 33)
+        uses: android-actions/setup-android@v3
         with:
           api-level: 33
           build-tools: 33.0.2
@@ -46,7 +46,7 @@ jobs:
           npx cap init "تطبيق الفصالة" "com.diaa.fessala" --web-dir=www
           npx cap add android
 
-      - name: 🔒 إضافة صلاحيات Android (Foreground Service, Notifications, Service)
+      - name: 🔒 إضافة صلاحيات Android (Foreground Service, Notifications)
         run: |
           MANIFEST="android/app/src/main/AndroidManifest.xml"
           # إضافة الصلاحيات قبل </manifest>
@@ -54,10 +54,9 @@ jobs:
           <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />\
           <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />\
           <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />' "$MANIFEST"
-          # إضافة تعريف الخدمة الأمامية قبل </application>
+          # إضافة تعريف الخدمة قبل </application>
           sed -i '/<\/application>/i \
           <service android:name="com.capawesome.capacitor.foregroundservice.ForegroundService" android:foregroundServiceType="dataSync" android:exported="false" />' "$MANIFEST"
-          # التأكد من أن compileSdkVersion و targetSdkVersion على الأقل 33 (سيتكفل بهما actions-setup-android)
           echo "✅ تم تعديل AndroidManifest.xml"
 
       - name: 🏗️ بناء الـ APK
@@ -67,7 +66,7 @@ jobs:
           ./gradlew assembleDebug
 
       - name: 📤 رفع الـ APK كـ Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: fessala-app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
